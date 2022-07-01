@@ -218,4 +218,22 @@ public class PostControllerTest {
             .andDo(MockMvcResultHandlers.print());
        
     }
+
+    @Test
+    @DisplayName("게시글 작성시 제목에 '바보'는 포함 될 수 없다.")
+    void test10() throws Exception {
+
+        PostCreate request = PostCreate.builder()
+            .title("나는 바보입니다.")
+            .content("내용입니다.")
+            .build();
+
+        mockMvc.perform(MockMvcRequestBuilders.post("/posts")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(request))
+            )
+            .andExpect(MockMvcResultMatchers.status().isNotFound())
+            .andDo(MockMvcResultHandlers.print());
+      
+    }
 }

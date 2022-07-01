@@ -2,6 +2,7 @@ package com.study.api.controller;
 
 
 import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+import com.study.api.exception.CommonException;
 import com.study.api.exception.PostNotFound;
 import com.study.api.response.ErrorResponse;
 
@@ -33,14 +35,16 @@ public class ExceptionController {
         return response;
     }
 
-    @ResponseStatus(HttpStatus.NOT_FOUND)
-    @ExceptionHandler(PostNotFound.class)
-    public ErrorResponse postNotFound(PostNotFound e) {
+    @ExceptionHandler(CommonException.class)
+    public ResponseEntity<ErrorResponse> postNotFound(CommonException e) {
+        int statusCode = e.getStatusCode();
 
-        ErrorResponse response = ErrorResponse.builder()
-            .code("404")
+        ErrorResponse body = ErrorResponse.builder()
+            .code(String.valueOf(statusCode))
             .message(e.getMessage())
             .build();
+
+        ResponseEntity<ErrorResponse> response = ResponseEntity.status(statusCode).body(body);
 
         return response;
     }
