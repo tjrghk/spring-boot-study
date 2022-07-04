@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.study.api.exception.InvalidRequest;
 import com.study.api.request.PostCreate;
 import com.study.api.request.PostEdit;
 import com.study.api.request.PostSearch;
@@ -33,9 +32,7 @@ public class PostController {
     
     @PostMapping("/posts")
     public void post(@RequestBody @Valid PostCreate postCreate) {
-        if (postCreate.getTitle().contains("바보")) {
-            throw new InvalidRequest();
-        }
+        postCreate.validate();
         postService.write(postCreate);
     }
 

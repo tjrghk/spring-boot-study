@@ -232,7 +232,7 @@ public class PostControllerTest {
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(objectMapper.writeValueAsString(request))
             )
-            .andExpect(MockMvcResultMatchers.status().isNotFound())
+            .andExpect(MockMvcResultMatchers.status().isBadRequest())
             .andDo(MockMvcResultHandlers.print());
       
     }

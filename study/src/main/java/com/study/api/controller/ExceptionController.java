@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
 import com.study.api.exception.CommonException;
-import com.study.api.exception.PostNotFound;
 import com.study.api.response.ErrorResponse;
 
 
@@ -42,6 +41,7 @@ public class ExceptionController {
         ErrorResponse body = ErrorResponse.builder()
             .code(String.valueOf(statusCode))
             .message(e.getMessage())
+            .validation(e.getValidation())
             .build();
 
         ResponseEntity<ErrorResponse> response = ResponseEntity.status(statusCode).body(body);
