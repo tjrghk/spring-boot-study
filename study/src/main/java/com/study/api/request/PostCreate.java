@@ -27,6 +27,7 @@ public class PostCreate {
     public PostCreate(String title, String content) {
         this.title = title;
         this.content = content;
+        System.out.print("");
     }
 
     public void validate() {
