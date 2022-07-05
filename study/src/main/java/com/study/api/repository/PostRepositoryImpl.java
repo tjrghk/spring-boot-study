@@ -2,10 +2,10 @@ package com.study.api.repository;
 
 import java.util.List;
 
-import com.querydsl.jpa.impl.JPAQueryFactory;
+import com.querydsl.jpa.impl.JPAQueryFactory;                                                                                 
 import com.study.api.domain.Post;
 import com.study.api.domain.QPost;
-import com.study.api.request.PostSearch;
+import com.study.api.request.PostSearch;    
 
 import lombok.RequiredArgsConstructor;
 
