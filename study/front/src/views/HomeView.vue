@@ -1,10 +1,12 @@
 <script setup lang="ts">
   import axios from "axios";
-
-  const posts = [];
-
+  import { ref } from "vue";
+  
+  const posts = ref([]);
   axios.get("/api/posts?page=1&size=5").then((response) => {
-    console.log(response);
+    response.data.forEach((r: any) => {
+      posts.value.push(r);
+    })
   });
 
   
